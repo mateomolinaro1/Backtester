@@ -1,0 +1,63 @@
+
+{
+  "data_sources": {
+    "market": {
+      "path": "data/wrds_gross_query.parquet",
+      "preset": "wrds"
+    },
+    "fundamentals": {
+      "path": "data/wrds_funda_gross_query.parquet",
+      "preset": "wrds"
+    }
+  },
+  "universe": {
+    "filters": [
+      {"column": "exchcd", "operator": "in", "value": [1, 2, 3]}
+    ]
+  },
+  "outlier_treatment": {
+    "treatments": [
+      {"column": "return", "method": "quantile", "lower_quantile": 0.005, "upper_quantile": 0.995, "action": "winsorize"},
+      {"column": "bm", "method": "quantile", "lower_quantile": 0.01, "upper_quantile": 0.99, "action": "winsorize"}
+    ]
+  },
+  "signal_construction": {
+    "scores": [
+      {"column": "return_treated", "method": "robust_zscore", "direction": 1},
+      {"column": "bm_treated", "method": "robust_zscore", "direction": 1}
+    ]
+  },
+  "beta": {
+    "benchmark_path": "data/russell_returns.parquet",
+    "risk_free_path": "data/risk_free_returns.parquet",
+    "benchmark_calendar_max_ffill": 5,
+    "risk_free_calendar_max_ffill": 5
+  },
+  "neutralization": {
+    "signal_columns": ["return_treated_raw_score"],
+    "exposures": [
+      {"type": "continuous", "column": "beta"},
+      {"type": "categorical", "column": "gsector"}
+    ]
+  },
+  "final_signal": {
+    "standardizations": [
+      {"column": "return_treated_raw_score_neutral", "method": "robust_zscore"}
+    ]
+  },
+  "pure_alpha": {
+    "signal_column": "return_treated_raw_score_neutral_final",
+    "mapping": {"method": "tanh", "kappa": 1.0},
+    "exposures": [
+      {"type": "continuous", "column": "beta"}
+    ],
+    "gross_exposure": 2.0
+  },
+  "isovol": {
+    "target_volatility_annualized": 0.10,
+    "periods_per_year": null,
+    "max_leverage": 4.0,
+    "window": 252,
+    "min_periods": 126
+  }
+}

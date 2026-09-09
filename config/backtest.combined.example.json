@@ -1,0 +1,16 @@
+{
+  "data_sources": {
+    "combined": {
+      "path": "data/combined_market_and_fundamentals.parquet",
+      "dataset_column": "dataset",
+      "market": {
+        "dataset_value": "market",
+        "preset": "wrds"
+      },
+      "fundamentals": {
+        "dataset_value": "fundamentals",
+        "preset": "wrds"
+      }
+    }
+  }
+}

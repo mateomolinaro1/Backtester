@@ -1,0 +1,32 @@
+- supply on merged df insteaf of a mkt and funda
+- unit test for custom mapping
+Q2) Yes I agree but I was saying if the user concatenated 
+warnings
+let's .copy() for now but after we'll make it memory efficient
+create a Library of pre existing signals agnostic o data source
+outlier is MAD  threshold not robust  cross sectional standardization
+refactoring in OOP
+as of join avant construct signals
+
+plug possibility of a model genberated signal
+0) bench and rf configurable as well as prices / returns, ffill max.
+reorganize TS/stats in modules
+1) read all neutralization step -> fill missing exposure with cs mean?
+3) debug pipeline until neutralization
+eligible rules every x freq
+2) add ind dummies
+
+refacto beta bc it's not a standalone pipeline step
+try a full pure alpha pipeline
+signal diagnostics
+update the backtetsing guide
+next: isovol
+why some dates drop: now 1,119 of 1,258 dates compute successfully?
+gross normalization → historical isovol (lag between weights and returns?) scaling, the isovol undo the gross normalization?
+gappy indiv returns: can be ffil x times to avoid being deleted for risk estimation (V2)
+
+    #: The date has held securities, but doesn't appear in market's own date
+    #: index at all -- a structural weights/market mismatch, not expected in
+    #: normal pipeline use (weights derives from market).
+
+make a unique calendar source: one for nav (calendar year), one for rebal (market calendar)

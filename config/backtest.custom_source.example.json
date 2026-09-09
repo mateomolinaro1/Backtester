@@ -1,0 +1,19 @@
+{
+  "data_sources": {
+    "market": {
+      "path": "data/some_other_vendor_market_data.parquet",
+      "columns": {
+        "security_id": "SecurityID",
+        "date": "TradeDate",
+        "price": "ClosePrice",
+        "volume": "Volume",
+        "shares_outstanding": "SharesOut",
+        "return": "DailyReturn"
+      }
+    },
+    "fundamentals": {
+      "path": "data/wrds_funda_gross_query.parquet",
+      "preset": "wrds"
+    }
+  }
+}
